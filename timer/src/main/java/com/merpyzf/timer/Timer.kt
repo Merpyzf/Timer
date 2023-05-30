@@ -8,9 +8,13 @@ import androidx.annotation.CallSuper
  * @date: 2023/5/13
  */
 abstract class Timer {
-
     var timerState: TimerState = TimerState.RESET
         internal set
+    open val currentTime : Long = 0L
+
+    fun isRunning(): Boolean{
+        return timerState.isRunning
+    }
 
     @CallSuper
     open fun start() {
@@ -26,9 +30,4 @@ abstract class Timer {
     open fun forceStop() {
         timerState = TimerState.RESET
     }
-
-    /**
-     * @param add True to add amount to the current time. False to set current time to amount
-     */
-    abstract fun adjust(amount: Long, add: Boolean)
 }
